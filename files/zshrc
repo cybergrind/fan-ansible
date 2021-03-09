@@ -200,6 +200,10 @@ function _exists {
     whence $1 > /dev/null
 }
 
+if _exists fdfind; then
+   alias fd=fdfind
+fi
+
 function aws_setup {
     if [[ $AWS_READY == 1 ]]; then
         return 0
