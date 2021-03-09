@@ -1,6 +1,6 @@
 - name: 'install packages'
   package:
-    name: '{{item}}'
+    name: '{{ item }}'
   become: true
   tags:
     - packages
@@ -18,14 +18,21 @@
 
 - name: "install ubuntu deps"
   apt:
-    name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'build-essential','libssl-dev', 'libffi-dev']
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - build-essential
+      - libssl-dev
+      - libffi-dev
     state: present
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_distribution in ['Ubuntu', 'Debian']
 
 
 - name: 'install py3y packages'
   package:
-    name: '{{item}}'
+    name: '{{ item }}'
   become: true
   with_items:
     - python3-dev
@@ -34,8 +41,3 @@
 
   when:
     - ansible_distribution in ['Ubuntu', 'Debian']
-
-
-- name: 'install pip'
-  become: yes
-  package: name='{{ pip_package }}' state=present

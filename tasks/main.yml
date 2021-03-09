@@ -4,7 +4,7 @@
   become: true
 
 - name: 'default keys'
-  set_fact: pubkey_list='{{lookup("file", item)}}'
+  set_fact: pubkey_list='{{ lookup("file", item) }}'
   register: pubkeys
   with_items: '{{ authorized_keys }}'
   tags:
@@ -15,37 +15,37 @@
     - ssh_keys
 
 - name: 'setup default authorized keys'
-  authorized_key: user='{{user}}' key='{{ pubkey_string}}' exclusive=true
+  authorized_key: user='{{ user }}' key='{{ pubkey_string}}' exclusive=true
   tags:
     - ssh_keys
 
 - name: 'setup extra authorized keys'
-  authorized_key: user='{{user}}' key='{{lookup("file", item)}}'
+  authorized_key: user='{{ user }}' key='{{ lookup("file", item) }}'
   with_items: '{{ extra_authorized_keys }}'
   tags:
     - ssh_keys
 
 - copy:
     src: 'files/gitconfig'
-    dest: '{{home}}/.gitconfig'
-    owner: '{{user}}'
+    dest: '{{ home }}/.gitconfig'
+    owner: '{{ user }}'
 
 
 - include: hetzner.yml
   when: is_hetzner
 
 - file:
-    path: '{{home}}/.docker'
+    path: '{{ home }}/.docker'
     state: directory
-    owner: '{{user}}'
+    owner: '{{ user }}'
 
 - include: zsh.yml
 
 - name: add dots
   copy:
-    src: "files/{{item}}"
-    dest: "~/.{{item}}"
-    owner: '{{user}}'
+    src: "files/{{ item }}"
+    dest: "~/.{{ item }}"
+    owner: '{{ user }}'
   with_items:
     - screenrc
     - bash_profile
@@ -58,10 +58,10 @@
     force: true
 
 
-- name: 'add user {{user}} to docker group'
+- name: 'add user {{ user }} to docker group'
   become: yes
   user:
-    name: '{{user}}'
+    name: '{{ user }}'
     groups: docker
     append: yes
   when: has_docker

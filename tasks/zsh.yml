@@ -17,11 +17,11 @@
 - file:
     path: ~/.config
     state: directory
-    owner: '{{user}}'
+    owner: '{{ user }}'
 
 - copy:
-    src: 'files/configs/{{inventory_hostname}}.sh'
-    dest: '~/.config/{{inventory_hostname}}.sh'
+    src: 'files/configs/{{ inventory_hostname }}.sh'
+    dest: '~/.config/{{ inventory_hostname }}.sh'
   ignore_errors: true
   tags:
     - user_configs
@@ -33,6 +33,5 @@
     - user_configs
 
 - name: setup zsh as a default shell
-  user: name={{user}} shell=/usr/bin/zsh
+  user: name={{ user }} shell=/usr/bin/zsh
   become: true
-
