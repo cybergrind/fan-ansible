@@ -1,2 +1,65 @@
 ---
 # tasks file for fan-ansible
+
+- name: 'default keys'
+  set_fact: pubkey_list='{{lookup("file", item)}}'
+  register: pubkeys
+  with_items: '{{ authorized_keys }}'
+  tags:
+    - ssh_keys
+
+- set_fact: pubkey_string="{{ pubkeys.results | map(attribute='ansible_facts.pubkey_list') | join('\n') }}"
+  tags:
+    - ssh_keys
+
+- name: 'setup default authorized keys'
+  authorized_key: user='{{user}}' key='{{ pubkey_string}}' exclusive=true
+  tags:
+    - ssh_keys
+
+- name: 'setup extra authorized keys'
+  authorized_key: user='{{user}}' key='{{lookup("file", item)}}'
+  with_items: '{{ extra_authorized_keys }}'
+  tags:
+    - ssh_keys
+
+- copy:
+    src: 'files/gitconfig'
+    dest: '{{home}}/.gitconfig'
+    owner: '{{user}}'
+
+
+- include: hetzner.yml
+  when: is_hetzner
+
+- file:
+    path: '{{home}}/.docker'
+    state: directory
+    owner: '{{user}}'
+
+- include: zsh.yml
+
+- name: add dots
+  copy:
+    src: "files/{{item}}"
+    dest: "~/.{{item}}"
+    owner: '{{user}}'
+  with_items:
+    - screenrc
+    - bash_profile
+
+- name: checkout .emacs.d
+  git:
+    repo: 'https://github.com/cybergrind/emacs_config.git'
+    dest: '~/.emacs.d'
+    accept_hostkey: yes
+    force: true
+
+
+- name: 'add user {{user}} to docker group'
+  become: yes
+  user:
+    name: '{{user}}'
+    groups: docker
+    append: yes
+  when: has_docker

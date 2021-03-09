@@ -1,0 +1,18 @@
+- file:
+    path: '{{home}}/.davfs2'
+    state: directory
+    owner: '{{user}}'
+    mode: '0700'
+
+- template:
+    src: 'templates/davfs_secrets'
+    dest: '~/.davfs2/secrets'
+    mode: '0600'
+  when: hz_backup_user is defined
+
+- user:
+    name: '{{user}}'
+    groups:
+      - davfs2
+    append: yes
+  become: yes

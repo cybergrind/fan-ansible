@@ -1,0 +1,4 @@
+[[ -f .config/environment.sh ]] && . .config/environment.sh
+
+CUSTOM_CONFIG="$HOME/.config/$(hostname).sh"
+[[ -f "$CUSTOM_CONFIG" ]] && . "$CUSTOM_CONFIG"

@@ -1,0 +1,38 @@
+- name: checkout oh-my-zsh
+  git:
+    repo: 'https://github.com/robbyrussell/oh-my-zsh.git'
+    dest: '~/.oh-my-zsh'
+    accept_hostkey: yes
+
+- name: add .zshrc
+  copy:
+    src: files/zshrc
+    dest: ~/.zshrc
+
+- name: add .zshenv
+  copy:
+    src: files/zshenv
+    dest: ~/.zshenv
+
+- file:
+    path: ~/.config
+    state: directory
+    owner: '{{user}}'
+
+- copy:
+    src: 'files/configs/{{inventory_hostname}}.sh'
+    dest: '~/.config/{{inventory_hostname}}.sh'
+  ignore_errors: true
+  tags:
+    - user_configs
+
+- template:
+    src: 'templates/environment.sh'
+    dest: '~/.config/environment.sh'
+  tags:
+    - user_configs
+
+- name: setup zsh as a default shell
+  user: name={{user}} shell=/usr/bin/zsh
+  become: true
+

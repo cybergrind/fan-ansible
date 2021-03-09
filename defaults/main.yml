@@ -1,2 +1,18 @@
 ---
 # defaults file for fan-ansible
+user: ubuntu
+home: '/home/{{user}}'
+LOGSTASH_HOST: logstash.example.com
+PR_CYAN: $PR_LIGHT_YELLOW
+
+# authorized_keys:
+#   - path/to/key
+authorized_keys: []
+extra_authorized_keys: []
+
+# id_rsa: files/id_rsa
+id_rsa: no
+has_docker: no
+
+custom_mounts: no
+is_hetzner: no

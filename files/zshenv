@@ -1,0 +1,5 @@
+CUSTOM_CONFIG="$HOME/.config/$(hostname).sh"
+[ -f "$CUSTOM_CONFIG" ] && source "$CUSTOM_CONFIG"
+
+ENV_CONFIG="$HOME/.config/environment.sh"
+[ -f "$ENV_CONFIG" ] && source "$ENV_CONFIG"
