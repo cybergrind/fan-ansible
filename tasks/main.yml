@@ -1,5 +1,7 @@
 ---
 # tasks file for fan-ansible
+- include: packages.yml
+  become: true
 
 - name: 'default keys'
   set_fact: pubkey_list='{{lookup("file", item)}}'
