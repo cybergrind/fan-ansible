@@ -31,11 +31,11 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-        - 18.04
-        - 20.04
+        - focal
+        - bionic
     - name: Debian
       versions:
-        - 9.0
+        - stretch
   # platforms:
   # - name: Fedora
   #   versions:
