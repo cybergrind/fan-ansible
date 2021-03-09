@@ -44,7 +44,7 @@
 - name: add dots
   copy:
     src: "files/{{ item }}"
-    dest: "~/.{{ item }}"
+    dest: "{{ home }}/.{{ item }}"
     owner: '{{ user }}'
   with_items:
     - screenrc
@@ -53,7 +53,7 @@
 - name: checkout .emacs.d
   git:
     repo: 'https://github.com/cybergrind/emacs_config.git'
-    dest: '~/.emacs.d'
+    dest: '{{ home }}/.emacs.d'
     accept_hostkey: yes
     force: true
 
