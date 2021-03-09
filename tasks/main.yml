@@ -15,7 +15,7 @@
     - ssh_keys
 
 - name: 'setup default authorized keys'
-  authorized_key: user='{{ user }}' key='{{ pubkey_string}}' exclusive=true
+  authorized_key: user='{{ user }}' key='{{ pubkey_string }}' exclusive=true
   tags:
     - ssh_keys
 
