@@ -16,20 +16,24 @@
     dest: '{{ home }}/.zshenv'
     owner: '{{ user }}'
 
-- file:
+- name: 'create {{ home }}/.config'
+  file:
     path: '{{ home }}/.config'
     state: directory
     owner: '{{ user }}'
 
-- copy:
+- name: 'create local config in {{ home }}/.config/{{ inventory_hostname }}.sh'
+  copy:
     src: 'files/configs/{{ inventory_hostname }}.sh'
     dest: '{{ home }}/.config/{{ inventory_hostname }}.sh'
     owner: '{{ user }}'
+  with_fileglob: 'files/configs/{{ inventory_hostname }}.sh'
   ignore_errors: true
   tags:
     - user_configs
 
-- template:
+- name: 'create {{ home }}/.config/environment.sh'
+  template:
     src: 'templates/environment.sh'
     dest: '{{ home }}/.config/environment.sh'
     owner: '{{ user }}'

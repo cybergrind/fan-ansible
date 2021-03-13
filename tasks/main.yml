@@ -10,7 +10,8 @@
   tags:
     - ssh_keys
 
-- set_fact: pubkey_string="{{ pubkeys.results | map(attribute='ansible_facts.pubkey_list') | join('\n') }}"
+- name: 'collect existing public keys'
+  set_fact: pubkey_string="{{ pubkeys.results | map(attribute='ansible_facts.pubkey_list') | join('\n') }}"
   tags:
     - ssh_keys
 
@@ -25,7 +26,8 @@
   tags:
     - ssh_keys
 
-- copy:
+- name: 'copy gitconfig'
+  copy:
     src: 'files/gitconfig'
     dest: '{{ home }}/.gitconfig'
     owner: '{{ user }}'
@@ -34,7 +36,8 @@
 - include: hetzner.yml
   when: is_hetzner
 
-- file:
+- name: 'create {{ home }}/.docker dir'
+  file:
     path: '{{ home }}/.docker'
     state: directory
     owner: '{{ user }}'
