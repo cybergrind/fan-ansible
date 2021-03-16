@@ -1,0 +1,12 @@
+- name: Add Docker key
+  apt_key:
+    url: 'https://download.docker.com/linux/debian/gpg'
+    state: present
+  when: ansible_distribution == 'Debian'
+
+- name: docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+    state: present
+    update_cache: yes
+  when: ansible_distribution == 'Debian'

@@ -1,0 +1,33 @@
+---
+- name: 'install gpg'
+  apt:
+    name:
+    - gnupg
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- include: docker-ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- include: docker-debian.yml
+  when: ansible_distribution == 'Debian'
+
+
+- name: "install {{ docker_package }}"
+  become: yes
+  apt:
+    name: "{{ docker_package }}"
+    state: present
+  when: ansible_os_family == 'Debian'
+
+
+- name: 'start docker'
+  become: yes
+  service:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: 'register docker'
+  set_fact:
+    docker_installed: true

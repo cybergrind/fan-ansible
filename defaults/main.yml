@@ -13,6 +13,7 @@ extra_authorized_keys: []
 # id_rsa: files/id_rsa
 id_rsa: no
 has_docker: no
+install_docker: no
 
 custom_mounts: no
 is_hetzner: no
