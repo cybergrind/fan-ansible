@@ -16,6 +16,14 @@ A description of the settable variables for this role should go here, including 
 Example Playbook
 ----------------
 
+Add `requirements.yaml`
+
+    - src: cybergrind.fan
+
+
+Install with `ansible-galaxy install --force -r requirements.yml`
+
+
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
      - hosts: '{{ to }}'
@@ -24,6 +32,8 @@ Including an example of how to use your role (for instance, with variables passe
          - role: cybergrind.fan
            vars:
              user: custom_user
+             install_docker: true
+             has_docker: true
              authorized_keys:
                - files/cybergrind.pub
 
