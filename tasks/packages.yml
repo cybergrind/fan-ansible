@@ -1,3 +1,17 @@
+- name: "install ubuntu deps"
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - build-essential
+      - libssl-dev
+      - libffi-dev
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
 - name: 'install packages'
   package:
     name: '{{ item }}'
@@ -15,20 +29,6 @@
     - fd-find
     - silversearcher-ag
     - net-tools
-
-- name: "install ubuntu deps"
-  apt:
-    name:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
-      - build-essential
-      - libssl-dev
-      - libffi-dev
-    state: present
-  when: ansible_distribution in ['Ubuntu', 'Debian']
-
 
 - name: 'install py3y packages'
   package:
