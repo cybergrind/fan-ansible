@@ -16,19 +16,21 @@
   package:
     name: '{{ item }}'
   become: true
+  ignore_errors: true
   tags:
     - packages
   with_items:
-    - git
-    - zsh
-    - vim-nox
-    - emacs-nox
-    - screen
-    - htop
     - awscli
-    - fd-find
-    - silversearcher-ag
+    - emacs-nox
+    - git
+    - htop
+    - httpie
     - net-tools
+    - screen
+    - silversearcher-ag
+    - vim-nox
+    - zsh
+    - fd-find
 
 - name: 'install py3y packages'
   package:
