@@ -20,6 +20,13 @@
     state: present
   when: ansible_os_family == 'Debian'
 
+- name: add /etc/docker/daemon.json config
+  become: yes
+  copy:
+    src: files/docker.daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    mode: 0644
 
 - name: 'start docker'
   become: yes
