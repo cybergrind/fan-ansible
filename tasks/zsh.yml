@@ -10,28 +10,28 @@
     src: files/zshrc
     dest: '{{ home }}/.zshrc'
     owner: '{{ user }}'
-    mode: '755'
+    mode: '0755'
 
 - name: add .zshenv
   copy:
     src: files/zshenv
     dest: '{{ home }}/.zshenv'
     owner: '{{ user }}'
-    mode: '755'
+    mode: '0755'
 
 - name: 'create {{ home }}/.config'
   file:
     path: '{{ home }}/.config'
     state: directory
     owner: '{{ user }}'
-    mode: '755'
+    mode: '0755'
 
 - name: 'create local config in {{ home }}/.config/{{ inventory_hostname }}.sh'
   copy:
     src: 'files/configs/{{ inventory_hostname }}.sh'
     dest: '{{ home }}/.config/{{ inventory_hostname }}.sh'
     owner: '{{ user }}'
-    mode: '755'
+    mode: '0755'
   with_fileglob: 'files/configs/{{ inventory_hostname }}.sh'
   ignore_errors: true
   tags:
@@ -42,7 +42,7 @@
     src: 'templates/environment.sh'
     dest: '{{ home }}/.config/environment.sh'
     owner: '{{ user }}'
-    mode: '755'
+    mode: '0755'
   tags:
     - user_configs
 

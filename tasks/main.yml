@@ -36,7 +36,7 @@
     src: 'files/gitconfig'
     dest: '{{ home }}/.gitconfig'
     owner: '{{ user }}'
-    mode: '644'
+    mode: '0644'
 
 
 - include: hetzner.yml
@@ -47,7 +47,7 @@
     path: '{{ home }}/.docker'
     state: directory
     owner: '{{ user }}'
-    mode: '755'
+    mode: '0755'
 
 - include: zsh.yml
 
@@ -56,7 +56,7 @@
     src: "files/{{ item }}"
     dest: "{{ home }}/.{{ item }}"
     owner: '{{ user }}'
-    mode: '644'
+    mode: '0644'
   with_items:
     - screenrc
     - bash_profile
