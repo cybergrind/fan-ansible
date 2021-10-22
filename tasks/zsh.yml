@@ -25,6 +25,8 @@
     state: directory
     owner: '{{ user }}'
     mode: '0755'
+  tags:
+    - user_configs
 
 - name: 'create local config in {{ home }}/.config/{{ inventory_hostname }}.sh'
   copy:

@@ -36,6 +36,13 @@ Including an example of how to use your role (for instance, with variables passe
              has_docker: true
              authorized_keys:
                - files/cybergrind.pub
+             # go to ~/.config/environment.sh that will be autoloaded
+             env_vars:
+               VAR1: VALUE1
+             group_vars:
+               VAR2: VALUE2
+             host_vars:
+               VAR3: VALUE2
 
 
 Deploy package
