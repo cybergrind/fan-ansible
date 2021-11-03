@@ -35,7 +35,7 @@
     owner: '{{ user }}'
     mode: '0755'
   with_fileglob: 'files/configs/{{ inventory_hostname }}.sh'
-  ignore_errors: true
+  failed_when: false
   tags:
     - user_configs
 

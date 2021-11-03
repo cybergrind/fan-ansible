@@ -4,9 +4,9 @@
     state: present
   when: ansible_distribution == 'Debian'
 
-- name: docker repo [debian] {{architecture}}
+- name: docker repo [debian] {{ architecture }}
   apt_repository:
-    repo: "deb [arch={{architecture}}] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ architecture }}] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
     state: present
     update_cache: yes
   when: ansible_distribution == 'Debian'

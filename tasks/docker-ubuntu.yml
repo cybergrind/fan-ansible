@@ -4,9 +4,9 @@
     state: present
   when: ansible_distribution == 'Ubuntu'
 
-- name: docker repo [ubuntu] {{architecture}}
+- name: docker repo [ubuntu] {{ architecture }}
   apt_repository:
-    repo: "deb [arch={{architecture}}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ architecture }}] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
     update_cache: yes
   when: ansible_distribution == 'Ubuntu'
