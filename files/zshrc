@@ -44,7 +44,7 @@ ZSH_THEME="jonathan"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ssh-agent fabric python postgres rsync extract docker golang pip sudo systemd zsh_reload z)
+plugins=(git ssh-agent fabric python postgres rsync extract docker golang pip sudo systemd z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -181,6 +181,12 @@ function _de_completion {
 }
 function de {
     case $# in
+        0)
+            if [[ $# = 0 && ! -z "$DE_DEFAULT" ]]; then
+                docker exec -it -e LINES=$(tput lines) -e COLUMNS=$(tput cols) $DE_DEFAULT /bin/bash
+            else
+                echo 'define $DE_DEFAULT variable to use without parameters'
+            fi;;
         1)
             docker exec -it -e LINES=$(tput lines) -e COLUMNS=$(tput cols) $1 /bin/bash;;
         *)
@@ -188,6 +194,11 @@ function de {
     esac
 }
 compctl -K _de_completion de
+
+function dck {
+    docker $@
+}
+compctl -K _de_completion dck
 # docker exec completion end
 
 
