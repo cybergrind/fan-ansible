@@ -8,9 +8,13 @@
 
 - include: docker-ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
+  tags:
+    - docker
 
 - include: docker-debian.yml
   when: ansible_distribution == 'Debian'
+  tags:
+    - docker
 
 
 - name: "install {{ docker_package }}"
@@ -19,6 +23,8 @@
     name: "{{ docker_package }}"
     state: present
   when: ansible_os_family == 'Debian'
+  tags:
+    - docker
 
 - name: add /etc/docker/daemon.json config
   become: yes

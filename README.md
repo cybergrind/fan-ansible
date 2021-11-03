@@ -34,6 +34,7 @@ Including an example of how to use your role (for instance, with variables passe
              user: custom_user
              install_docker: true
              has_docker: true
+             architecture: amd64  # can be arm64
              authorized_keys:
                - files/cybergrind.pub
              # go to ~/.config/environment.sh that will be autoloaded

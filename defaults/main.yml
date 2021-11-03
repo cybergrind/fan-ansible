@@ -17,3 +17,5 @@ install_docker: no
 
 custom_mounts: no
 is_hetzner: no
+
+architecture: amd64
