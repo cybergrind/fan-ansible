@@ -31,6 +31,8 @@
     - vim-nox
     - zsh
     - fd-find
+    - tree
+    - jq
 
 - name: 'install py3y packages'
   package:
