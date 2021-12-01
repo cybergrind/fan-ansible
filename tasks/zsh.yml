@@ -12,6 +12,13 @@
     owner: '{{ user }}'
     mode: '0755'
 
+- name: add vimrc
+  copy:
+    src: files/vimrc
+    dest: '{{ home }}/.vimrc'
+    owner: '{{ user }}'
+    mode: '0755'
+
 - name: add .zshenv
   copy:
     src: files/zshenv
