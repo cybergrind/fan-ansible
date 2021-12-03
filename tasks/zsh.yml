@@ -19,6 +19,12 @@
     owner: '{{ user }}'
     mode: '0755'
 
+- name: vimrc plug
+  shell:
+    cmd: >
+      curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 - name: add .zshenv
   copy:
     src: files/zshenv
