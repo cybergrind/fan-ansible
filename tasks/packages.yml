@@ -28,6 +28,7 @@
     - fd-find
     - tree
     - jq
+    - docker-compose
   become: true
   failed_when: false
   tags:
