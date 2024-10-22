@@ -1,17 +1,18 @@
 ---
 - name: 'install gpg'
+  become: true
   apt:
     name:
     - gnupg
     update_cache: yes
   when: ansible_os_family == 'Debian'
 
-- include: docker-ubuntu.yml
+- include_tasks: docker-ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
   tags:
     - docker
 
-- include: docker-debian.yml
+- include_tasks: docker-debian.yml
   when: ansible_distribution == 'Debian'
   tags:
     - docker

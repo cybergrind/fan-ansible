@@ -5,8 +5,7 @@
   tags:
     - docker
 
-- include: packages.yml
-  become: true
+- include_tasks: packages.yml
 
 - name: 'default keys'
   set_fact: pubkey_list='{{ lookup("file", item) }}'
@@ -39,7 +38,7 @@
     mode: '0644'
 
 
-- include: hetzner.yml
+- include_tasks: hetzner.yml
   when: is_hetzner
 
 - name: 'create {{ home }}/.docker dir'
@@ -49,7 +48,7 @@
     owner: '{{ user }}'
     mode: '0755'
 
-- include: zsh.yml
+- include_tasks: zsh.yml
 
 - name: add dots
   copy:
@@ -70,9 +69,8 @@
     version: master
 
 
-- include: docker.yml
+- include_tasks: docker.yml
   when: install_docker
-  become: yes
   tags:
     - docker
 

@@ -1,4 +1,5 @@
 - name: "install ubuntu deps"
+  become: true
   apt:
     name:
       - apt-transport-https
@@ -15,7 +16,6 @@
 - name: 'install packages'
   package:
     name:
-    - awscli
     - emacs-nox
     - git
     - htop
@@ -30,9 +30,30 @@
     - jq
     - docker-compose
   become: true
-  failed_when: false
   tags:
     - packages
+
+- name: 'install awscli'
+  package:
+    name: awscli
+    state: present
+  become: true
+  tags:
+    - packages
+  when:
+    - ansible_distribution_major_version < '24' or ansible_distribution == 'Debian'
+
+- name: 'install awscli'
+  snap:
+    name:
+     - aws-cli
+    classic: true
+  become: true
+  tags:
+    - packages
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_major_version >= '24'
 
 - name: 'install py3y packages'
   package:
