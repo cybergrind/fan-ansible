@@ -33,6 +33,7 @@ galaxy_info:
       versions:
         - focal
         - bionic
+        - noble
     - name: Debian
       versions:
         - stretch
